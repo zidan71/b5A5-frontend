@@ -7,6 +7,18 @@ import { useGetAdminDashboardQuery } from "../../features/dashboardApi";
 import toast from "react-hot-toast";
 
 export default function SenderDashboard() {
+
+  const [selectedParcel, setSelectedParcel] = useState<any | null>(null);
+  const [timelineOpen, setTimelineOpen] = useState(false);
+
+
+const handleViewTimeline = (parcel: any) => {
+    setSelectedParcel(parcel);
+    setTimelineOpen(true);
+  };
+
+
+
   const auth = useAppSelector((state: any) => state.auth);
 
   // Unified dashboard stats
@@ -135,11 +147,12 @@ export default function SenderDashboard() {
                 <th className="p-2">Weight</th>
                 <th className="p-2">Status</th>
                 <th className="p-2">Actions</th>
+                <th className="p-2">View</th>
               </tr>
             </thead>
             <tbody>
               {parcels.map((p: any) => (
-                <tr key={p._id} className="border-t">
+                <tr key={p._id} className="border-t text-center">
                   <td className="p-2">{p.trackingId}</td>
                   <td className="p-2">{p.type}</td>
                   <td className="p-2">{p.weight} kg</td>
@@ -153,14 +166,54 @@ export default function SenderDashboard() {
                         Cancel
                       </button>
                     ) : "-"}
-                  </td>
+                    </td>
+
+                    <td className="p-2">
+  <button
+    onClick={() => handleViewTimeline(p)}
+    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+  >
+    View Timeline
+  </button>
+</td>
+
+
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
           <p>No parcels yet.</p>
-        )}
+          )}
+
+           {timelineOpen && selectedParcel && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
+            <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
+            <ul className="space-y-2">
+              {selectedParcel.statusLog?.length > 0 ? (
+                selectedParcel.statusLog.map((log: any, idx: number) => (
+                  <li key={idx} className="border-b pb-2">
+                    <p><strong>Status:</strong> {log.status}</p>
+                    <p><strong>Time:</strong> {new Date(log.timestamp).toLocaleString()}</p>
+                    {log.note && <p><strong>Note:</strong> {log.note}</p>}
+                    {log.updatedBy?.name && <p><strong>Updated By:</strong> {log.updatedBy.name}</p>}
+                  </li>
+                ))
+              ) : (
+                <p>No history available.</p>
+              )}
+            </ul>
+            <button
+              onClick={() => setTimelineOpen(false)}
+              className="mt-4 px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       </div>
     </div>
   );

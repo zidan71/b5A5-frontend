@@ -1,4 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { useState } from "react";
 import toast from "react-hot-toast";
 import {
   useGetAllUsersQuery,
@@ -10,7 +13,8 @@ import {
   useUpdateParcelStatusMutation,
 } from "../../features/parcels/parcelApi";
 import { useGetAdminDashboardQuery } from "../../features/dashboardApi";
-import { BarChart,
+import {
+  BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -18,15 +22,34 @@ import { BarChart,
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell, } from "recharts";
+  Cell,
+} from "recharts";
 
-  const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
+
+ 
 
 
-  
+const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
+
+
+
 
 
 export default function AdminDashboard() {
+
+
+  const [selectedParcel, setSelectedParcel] = useState<any | null>(null);
+  const [timelineOpen, setTimelineOpen] = useState(false);
+
+
+const handleViewTimeline = (parcel: any) => {
+    setSelectedParcel(parcel);
+    setTimelineOpen(true);
+  };
+
+
+
+
   // Dashboard stats
   const { data: stats, isLoading: loadingStats } = useGetAdminDashboardQuery();
 
@@ -109,7 +132,7 @@ export default function AdminDashboard() {
         ) : null}
       </div>
 
-{/* Charts Section */}
+      {/* Charts Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Monthly Shipments */}
         <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
@@ -178,8 +201,8 @@ export default function AdminDashboard() {
             </thead>
             <tbody>
               {users.map((u: any) => (
-                <tr key={u._id} className="border-t">
-                  <td className="p-2">{u.name}</td>
+                <tr key={u._id} className="border-t text-center">
+                  <td className="p-2 text-center">{u.name}</td>
                   <td className="p-2">{u.email}</td>
                   <td className="p-2">{u.role}</td>
                   <td className="p-2">{u.isBlocked ? "Yes" : "No"}</td>
@@ -223,11 +246,13 @@ export default function AdminDashboard() {
                 <th className="p-2">Receiver</th>
                 <th className="p-2">Status</th>
                 <th className="p-2">Actions</th>
+                <th className="p-2">View</th>
+
               </tr>
             </thead>
             <tbody>
               {parcels.map((p: any) => (
-                <tr key={p._id} className="border-t">
+                <tr key={p._id} className="border-t text-center">
                   <td className="p-2">{p.trackingId}</td>
                   <td className="p-2">{p.sender.name}</td>
                   <td className="p-2">{p.receiver.name}</td>
@@ -254,6 +279,15 @@ export default function AdminDashboard() {
                       ))}
                     </select>
                   </td>
+                  <td className="p-2">
+                    <button
+                      onClick={() => handleViewTimeline(p)}
+                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                      View Timeline
+                    </button>
+                  </td>
+
                 </tr>
               ))}
             </tbody>
@@ -261,6 +295,35 @@ export default function AdminDashboard() {
         ) : (
           <p>No parcels found.</p>
         )}
+
+   {timelineOpen && selectedParcel && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
+            <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
+            <ul className="space-y-2">
+              {selectedParcel.statusLog?.length > 0 ? (
+                selectedParcel.statusLog.map((log: any, idx: number) => (
+                  <li key={idx} className="border-b pb-2">
+                    <p><strong>Status:</strong> {log.status}</p>
+                    <p><strong>Time:</strong> {new Date(log.timestamp).toLocaleString()}</p>
+                    {log.note && <p><strong>Note:</strong> {log.note}</p>}
+                    {log.updatedBy?.name && <p><strong>Updated By:</strong> {log.updatedBy.name}</p>}
+                  </li>
+                ))
+              ) : (
+                <p>No history available.</p>
+              )}
+            </ul>
+            <button
+              onClick={() => setTimelineOpen(false)}
+              className="mt-4 px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       </div>
     </div>
   );
