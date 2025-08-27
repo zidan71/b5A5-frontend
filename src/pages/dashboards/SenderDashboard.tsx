@@ -72,15 +72,15 @@ const handleViewTimeline = (parcel: any) => {
           <p>Loading stats...</p>
         ) : (
           <>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Parcels Sent</h2>
               <p className="text-2xl font-bold">{stats?.totalParcels || 0}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Delivered</h2>
               <p className="text-2xl font-bold">{stats?.deliveredParcels || 0}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Cancelled</h2>
               <p className="text-2xl font-bold">{stats?.cancelledParcels || 0}</p>
             </div>
@@ -89,7 +89,7 @@ const handleViewTimeline = (parcel: any) => {
       </div>
 
       {/* Create Parcel Form */}
-      <div className="mb-10 p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="mb-10 p-4 bg-white  rounded shadow">
         <h2 className="text-xl font-medium mb-4">Create New Parcel</h2>
         <form onSubmit={handleCreate} className="space-y-3">
           <input
@@ -126,7 +126,7 @@ const handleViewTimeline = (parcel: any) => {
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 bg-blue-600 cursor-pointer text-white rounded hover:bg-blue-700"
           >
             Create Parcel
           </button>
@@ -134,14 +134,14 @@ const handleViewTimeline = (parcel: any) => {
       </div>
 
       {/* My Parcels */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">My Parcels</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : parcels && parcels.length > 0 ? (
-          <table className="w-full border">
+          <table className="w-full border border-gray-400 ">
             <thead>
-              <tr className="bg-gray-200 dark:bg-gray-700">
+              <tr className="bg-gray-200 ">
                 <th className="p-2">Tracking ID</th>
                 <th className="p-2">Type</th>
                 <th className="p-2">Weight</th>
@@ -171,7 +171,7 @@ const handleViewTimeline = (parcel: any) => {
                     <td className="p-2">
   <button
     onClick={() => handleViewTimeline(p)}
-    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+    className="px-3 py-1 bg-blue-500 cursor-pointer text-white rounded hover:bg-blue-600"
   >
     View Timeline
   </button>
@@ -187,8 +187,8 @@ const handleViewTimeline = (parcel: any) => {
           )}
 
            {timelineOpen && selectedParcel && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-200  bg-opacity-50 z-50">
+          <div className="bg-white  p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
             <ul className="space-y-2">
               {selectedParcel.statusLog?.length > 0 ? (
@@ -206,7 +206,7 @@ const handleViewTimeline = (parcel: any) => {
             </ul>
             <button
               onClick={() => setTimelineOpen(false)}
-              className="mt-4 px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
+              className="mt-4 px-4 py-2 bg-gray-300 cursor-pointer  rounded hover:bg-gray-400"
             >
               Close
             </button>

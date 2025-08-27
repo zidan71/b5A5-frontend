@@ -17,10 +17,8 @@ const handleViewTimeline = (parcel: any) => {
     setTimelineOpen(true);
   };
 
-  // Unified dashboard stats
   const { data: stats, isLoading: loadingStats } = useGetAdminDashboardQuery();
 
-  // Receiver-specific parcels
   const { data: incoming, isLoading: loadingIncoming, refetch: refetchIncoming } = useIncomingParcelsQuery();
   const { data: delivered, isLoading: loadingDelivered, refetch: refetchDelivered } = useDeliveredParcelsQuery();
   const [confirmDelivery] = useConfirmParcelDeliveryMutation();
