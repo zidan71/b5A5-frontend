@@ -21,7 +21,6 @@ export default function App() {
            <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        {/* <Route path="/faq" element={<FAQPage />} /> */}
 
 
     <Route path="/track" element={<TrackParcelPage />} />

@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// ✅ Validation schema
 const registerSchema = yup.object().shape({
   name: yup.string().required("Full name is required"),
   email: yup.string().email("Invalid email format").required("Email is required"),

@@ -1,69 +1,72 @@
-# React + TypeScript + Vite
+# Parcel Delivery System
+ 
+ _________________________________________ParcelFlux___________________________________________
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+This is a full-stack parcel delivery management system. Users can create, track, and manage parcels. Admins can manage users and parcels with a dashboard showing detailed statistics. The system supports role-based access (Admin, Sender, Receiver) and real-time parcel status updates.
 
-Currently, two official plugins are available:
+Key features:
+- User registration and login (Admin, Sender, Receiver)
+- Parcel creation, tracking, and status updates
+- Admin dashboard with statistics
+- Role-based access control
+- Parcel search, filter, and pagination
+- Responsive UI for mobile, tablet, and desktop
+- Validation with React Hook Form + Yup
+- Loading spinners and skeletons for better UX
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technology Stack
+**Frontend:**
+- React.js + TypeScript
+- Redux Toolkit + RTK Query
+- React Hook Form + Yup for validation
+- Tailwind CSS for styling
+- react-hot-toast for notifications
+- React Router for routing
 
-## Expanding the ESLint configuration
+**Backend:**
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JWT authentication
+- CORS configuration for cross-origin requests
+- Deployed on [Vercel](https://parcel-delivery-api-ashy.vercel.app)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Deployment:**
+- Frontend hosted on [Surge](https://parcelfluxzidanassignment6.surge.sh)
+- Backend hosted on [Vercel](https://parcel-delivery-api-ashy.vercel.app)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Setup Instructions
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Backend
+1. Clone the backend repository:
+   ```bash
+   git clone "https://github.com/zidan71/b5A5-backend"
+   cd b5A5-backend  
+2. npm install
+3. npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Frontend
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. git clone "https://github.com/zidan71/b5A5-frontend"
+   cd b5A5-frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. npm install
+3. set environment variable in .env
+   VITE_API_URL=https://parcel-delivery-api-ashy.vercel.app/api
+4. npm run dev
+   
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   Frontend: https://parcelfluxzidanassignment6.surge.sh
+
+   Backend: https://parcel-delivery-api-ashy.vercel.app
+
+
+### Notes
+
+. Ensure both frontend and backend use HTTPS in production to avoid CORS/mixed content issues.
+
+. Use valid JWT tokens for authenticated requests.
+
+. For any issues with parcel creation or status updates, check the browser console for detailed errors.
+
+. Pagination and search filters are supported in the “My Parcels” table for better management of large datasets.

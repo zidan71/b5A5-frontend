@@ -12,7 +12,6 @@ interface AuthState {
   token: string | null;
 }
 
-// Load from localStorage
 const storedAuth = localStorage.getItem("auth");
 const initialState: AuthState = storedAuth
   ? JSON.parse(storedAuth)

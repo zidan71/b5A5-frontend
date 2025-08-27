@@ -13,8 +13,8 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      // ❌ no toasts here, just update state
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
@@ -32,7 +32,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: newUser,
       }),
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));

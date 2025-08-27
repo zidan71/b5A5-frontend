@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
-// ✅ Validation schema
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email format").required("Email is required"),
   password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
@@ -22,7 +21,6 @@ export default function LoginPage() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  // ✅ Setup react-hook-form
   const {
     register,
     handleSubmit,
@@ -38,7 +36,6 @@ export default function LoginPage() {
 
       toast.success("Logged in successfully!");
 
-      // ✅ Redirect based on role
       if (res.user.role === "admin") navigate("/admin-dashboard");
       else if (res.user.role === "sender") navigate("/sender-dashboard");
       else navigate("/receiver-dashboard");
@@ -112,7 +109,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center my-6">
           <div className="flex-grow h-px bg-gray-300 dark:bg-gray-600"></div>
           <span className="px-3 text-gray-500 text-sm">OR</span>

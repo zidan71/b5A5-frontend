@@ -16,7 +16,7 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-300 text-white p-4 flex justify-between items-center">
       <Link to="/" className="font-bold text-lg">
-        Parcel Delivery Api
+        ParcelFlux
       </Link>
 
       <button

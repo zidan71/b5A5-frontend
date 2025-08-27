@@ -19,7 +19,7 @@ export default function TrackParcelPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-gray-300  rounded shadow">
       <h2 className="text-2xl font-semibold mb-4 text-center">Track Parcel</h2>
 
       <form onSubmit={handleSubmit} className="flex gap-2 mb-6">

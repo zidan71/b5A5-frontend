@@ -8,7 +8,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulated submission
     toast.success("Your message has been sent!");
     setName("");
     setEmail("");
