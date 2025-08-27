@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
@@ -24,6 +23,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import Navbar from "../../components/layout/Navbar";
 
 
  
@@ -50,10 +50,8 @@ const handleViewTimeline = (parcel: any) => {
 
 
 
-  // Dashboard stats
   const { data: stats, isLoading: loadingStats } = useGetAdminDashboardQuery();
 
-  // Users
   const {
     data: users,
     refetch: refetchUsers,
@@ -62,12 +60,10 @@ const handleViewTimeline = (parcel: any) => {
   const [blockUser] = useBlockUserMutation();
   const [unblockUser] = useUnblockUserMutation();
 
-  // Parcels
   const { data: parcels, refetch: refetchParcels, isLoading: loadingParcels } =
     useAllParcelsQuery();
   const [updateParcelStatus] = useUpdateParcelStatusMutation();
 
-  // Handlers
   const handleBlockUser = async (id: string) => {
     try {
       await blockUser(id).unwrap();
@@ -99,32 +95,34 @@ const handleViewTimeline = (parcel: any) => {
   };
 
   return (
+    <div>
+      <Navbar></Navbar>
+
     <div className="p-6 space-y-8">
       <h1 className="text-3xl font-semibold">Admin Dashboard</h1>
 
-      {/* Dashboard Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {loadingStats ? (
           <p>Loading stats...</p>
         ) : stats ? (
           <>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center">
+            <div className="p-4 bg-white  rounded shadow text-center">
               <p className="text-gray-500">Total Parcels</p>
               <p className="text-2xl font-bold">{stats.totalParcels}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center">
+            <div className="p-4 bg-white  rounded shadow text-center">
               <p className="text-gray-500">Pending</p>
               <p className="text-2xl font-bold">{stats.pendingParcels}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center">
+            <div className="p-4 bg-white  rounded shadow text-center">
               <p className="text-gray-500">Delivered</p>
               <p className="text-2xl font-bold">{stats.deliveredParcels}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center">
+            <div className="p-4 bg-white  rounded shadow text-center">
               <p className="text-gray-500">Cancelled</p>
               <p className="text-2xl font-bold">{stats.cancelledParcels}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center">
+            <div className="p-4 bg-white  rounded shadow text-center">
               <p className="text-gray-500">Active Users</p>
               <p className="text-2xl font-bold">{stats.activeUsers}</p>
             </div>
@@ -135,7 +133,7 @@ const handleViewTimeline = (parcel: any) => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Monthly Shipments */}
-        <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
+        <div className="bg-white  p-4 rounded shadow">
           <h2 className="text-lg font-semibold mb-4">Monthly Shipments</h2>
           {stats?.monthlyTrend && stats.monthlyTrend.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
@@ -157,7 +155,7 @@ const handleViewTimeline = (parcel: any) => {
 
 
         {/* Status Distribution */}
-        <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
+        <div className="bg-white  p-4 rounded shadow">
           <h2 className="text-lg font-semibold mb-4">Parcel Status Distribution</h2>
           {stats?.statusDistribution && stats.statusDistribution.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
@@ -184,14 +182,14 @@ const handleViewTimeline = (parcel: any) => {
 
 
       {/* Users Management */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Users</h2>
         {loadingUsers ? (
           <p>Loading users...</p>
         ) : users && users.length > 0 ? (
           <table className="w-full border">
             <thead>
-              <tr className="bg-gray-200 dark:bg-gray-700">
+              <tr className="bg-gray-200 ">
                 <th className="p-2">Name</th>
                 <th className="p-2">Email</th>
                 <th className="p-2">Role</th>
@@ -210,14 +208,14 @@ const handleViewTimeline = (parcel: any) => {
                     {u.isBlocked ? (
                       <button
                         onClick={() => handleUnblockUser(u._id)}
-                        className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                        className="px-3 py-1 bg-green-500 text-white rounded cursor-pointer hover:bg-green-600"
                       >
                         Unblock
                       </button>
                     ) : (
                       <button
                         onClick={() => handleBlockUser(u._id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                        className="px-3 py-1 bg-red-500 text-white rounded cursor-pointer hover:bg-red-600"
                       >
                         Block
                       </button>
@@ -233,14 +231,14 @@ const handleViewTimeline = (parcel: any) => {
       </div>
 
       {/* Parcels Management */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Parcels</h2>
         {loadingParcels ? (
           <p>Loading parcels...</p>
         ) : parcels && parcels.length > 0 ? (
           <table className="w-full border">
             <thead>
-              <tr className="bg-gray-200 dark:bg-gray-700">
+              <tr className="bg-gray-200 ">
                 <th className="p-2">Tracking ID</th>
                 <th className="p-2">Sender</th>
                 <th className="p-2">Receiver</th>
@@ -263,7 +261,7 @@ const handleViewTimeline = (parcel: any) => {
                       onChange={(e) =>
                         handleUpdateParcelStatus(p._id, e.target.value)
                       }
-                      className="p-1 border rounded"
+                      className="p-1 border rounded cursor-pointer"
                     >
                       {[
                         "Requested",
@@ -282,7 +280,7 @@ const handleViewTimeline = (parcel: any) => {
                   <td className="p-2">
                     <button
                       onClick={() => handleViewTimeline(p)}
-                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      className="px-3 py-1 bg-blue-500 cursor-pointer text-white rounded hover:bg-blue-600"
                     >
                       View Timeline
                     </button>
@@ -298,7 +296,7 @@ const handleViewTimeline = (parcel: any) => {
 
    {timelineOpen && selectedParcel && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
+          <div className="bg-white  p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
             <ul className="space-y-2">
               {selectedParcel.statusLog?.length > 0 ? (
@@ -316,7 +314,7 @@ const handleViewTimeline = (parcel: any) => {
             </ul>
             <button
               onClick={() => setTimelineOpen(false)}
-              className="mt-4 px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
+              className="mt-4 px-4 py-2 bg-gray-300  rounded hover:bg-gray-400"
             >
               Close
             </button>
@@ -325,6 +323,7 @@ const handleViewTimeline = (parcel: any) => {
       )}
 
       </div>
+    </div>
     </div>
   );
 }

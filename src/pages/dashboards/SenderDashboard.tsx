@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks/useApp";
 import { useCreateParcelMutation, useMyParcelsQuery, useCancelParcelMutation } from "../../features/parcels/parcelApi";
 import { useGetAdminDashboardQuery } from "../../features/dashboardApi";
 import toast from "react-hot-toast";
+import Navbar from "../../components/layout/Navbar";
 
 export default function SenderDashboard() {
 
@@ -63,7 +64,11 @@ const handleViewTimeline = (parcel: any) => {
   };
 
   return (
-    <div className="p-6">
+   <div>
+
+    <Navbar></Navbar>
+
+     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Sender Dashboard</h1>
 
       {/* Overview Cards */}
@@ -216,5 +221,6 @@ const handleViewTimeline = (parcel: any) => {
 
       </div>
     </div>
+   </div>
   );
 }
