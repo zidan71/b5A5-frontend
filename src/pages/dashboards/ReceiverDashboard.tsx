@@ -95,7 +95,7 @@ const handleViewTimeline = (parcel: any) => {
                     {p.currentStatus !== "Delivered" ? (
                       <button
                         onClick={() => handleConfirm(p._id)}
-                        className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                        className="px-3 py-1 cursor-pointer bg-green-500 text-white rounded hover:bg-green-600"
                       >
                         Confirm Delivery
                       </button>

@@ -18,10 +18,11 @@ export const parcelApi = apiSlice.injectEndpoints({
     
 
     // Receiver
-    incomingParcels: builder.query<any[], void>({
-      query: () => "/parcels/incoming",
-      transformResponse: (res: any) => res.parcels,
-    }),
+   incomingParcels: builder.query<any[], void>({
+  query: () => "/parcels/incoming",
+  transformResponse: (res: any) => Array.isArray(res) ? res : res.parcels || [],
+}),
+
     deliveredParcels: builder.query<any[], void>({
       query: () => "/parcels/delivered",
       transformResponse: (res: any) => res.parcels,
