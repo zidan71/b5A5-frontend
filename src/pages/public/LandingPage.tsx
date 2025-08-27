@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
+import AboutPage from "./AboutPage";
+import ContactPage from "./ContactPage";
 
 export default function LandingPage() {
   return (
@@ -14,10 +16,13 @@ export default function LandingPage() {
         <Link to="/register" className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Get Started</Link>
       </header>
 
-      {/* Footer */}
-      <footer className="bg-gray-200 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 text-center">
-        &copy; {new Date().getFullYear()} Parcel Delivery. All rights reserved.
-      </footer>
+    <main>
+      <AboutPage></AboutPage>
+      <ContactPage></ContactPage>
+    </main>
+
+
+      
     </div>
   );
 }

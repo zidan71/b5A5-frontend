@@ -21,12 +21,11 @@ export default function Navbar() {
           <>
 
   <Link to="/" className="hover:underline">Home</Link>
-          <Link to="/about" className="hover:underline">About</Link>
-          <Link to="/contact" className="hover:underline">Contact</Link>
+        
       
           <Link to="/track" className="hover:text-gray-200">Track Parcel</Link>
       
-          <Link to="/faq" className="hover:underline">FAQ</Link>
+       
 
           <DashboardButton></DashboardButton>
             <span>{user.name}</span>
@@ -37,12 +36,11 @@ export default function Navbar() {
         ) : (
           <>
            <Link to="/" className="hover:underline">Home</Link>
-          <Link to="/about" className="hover:underline">About</Link>
-          <Link to="/contact" className="hover:underline">Contact</Link>
+      
       
           <Link to="/track" className="hover:text-gray-200">Track Parcel</Link>
       
-          <Link to="/faq" className="hover:underline">FAQ</Link>
+          
           <Link to="/login" className="bg-white text-blue-600 px-3 py-1 rounded hover:bg-gray-200">Login</Link>
           </>
         )}
