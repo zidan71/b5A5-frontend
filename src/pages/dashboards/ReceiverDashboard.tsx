@@ -4,6 +4,8 @@ import { useGetAdminDashboardQuery } from "../../features/dashboardApi";
 import { useIncomingParcelsQuery, useDeliveredParcelsQuery, useConfirmParcelDeliveryMutation } from "../../features/parcels/parcelApi";
 import toast from "react-hot-toast";
 import Navbar from "../../components/layout/Navbar";
+import Spinner from "../public/Spinner";
+import SkeletonTable from "../public/SkeletonTable";
 
 export default function ReceiverDashboard() {
 
@@ -47,7 +49,7 @@ const handleViewTimeline = (parcel: any) => {
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {loadingStats ? (
-          <p>Loading stats...</p>
+            <Spinner />
         ) : (
           <>
             <div className="p-4 bg-white  rounded shadow">
@@ -69,7 +71,7 @@ const handleViewTimeline = (parcel: any) => {
       {/* Incoming Parcels */}
       <div className="mb-10 p-4 bg-white  rounded shadow">
         <h2 className="text-xl font-medium mb-4">Incoming Parcels</h2>
-        {loadingIncoming ? <p>Loading...</p> : Array.isArray(incoming) && incoming.length > 0 ? (
+        {loadingIncoming ?   <Spinner />: Array.isArray(incoming) && incoming.length > 0 ? (
           <table className="w-full border">
             <thead>
               <tr className="bg-gray-200 ">
@@ -114,7 +116,7 @@ const handleViewTimeline = (parcel: any) => {
       {/* Delivered Parcels */}
       <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Delivery History</h2>
-        {loadingDelivered ? <p>Loading...</p> : Array.isArray(delivered) && delivered.length > 0 ? (
+        {loadingDelivered ?   <SkeletonTable/> : Array.isArray(delivered) && delivered.length > 0 ? (
           <table className="w-full border border-gray-300">
             <thead>
               <tr className="bg-gray-200 ">

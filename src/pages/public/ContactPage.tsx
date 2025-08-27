@@ -22,9 +22,9 @@ export default function ContactPage() {
         Have questions or feedback? Fill out the form below and we will get back to you as soon as possible.
       </p>
 
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow space-y-4">
+      <form onSubmit={handleSubmit} className="bg-white  p-8 rounded-lg shadow space-y-4">
         <div>
-          <label className="block text-gray-700 dark:text-gray-300 mb-1">Name</label>
+          <label className="block text-gray-700  mb-1">Name</label>
           <input
             type="text"
             className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -34,7 +34,7 @@ export default function ContactPage() {
           />
         </div>
         <div>
-          <label className="block text-gray-700 dark:text-gray-300 mb-1">Email</label>
+          <label className="block text-gray-700  mb-1">Email</label>
           <input
             type="email"
             className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -44,7 +44,7 @@ export default function ContactPage() {
           />
         </div>
         <div>
-          <label className="block text-gray-700 dark:text-gray-300 mb-1">Message</label>
+          <label className="block text-gray-700  mb-1">Message</label>
           <textarea
             className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
             rows={5}

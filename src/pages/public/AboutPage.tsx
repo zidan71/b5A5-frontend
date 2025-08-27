@@ -58,7 +58,7 @@ export default function AboutPage() {
     ].map((member) => (
       <div
         key={member.name}
-        className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition"
+        className="bg-white cursor-pointer p-6 rounded-lg shadow hover:shadow-lg transition"
       >
         <img
           src={member.image}

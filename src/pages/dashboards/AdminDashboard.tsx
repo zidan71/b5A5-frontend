@@ -24,6 +24,8 @@ import {
   Cell,
 } from "recharts";
 import Navbar from "../../components/layout/Navbar";
+import Spinner from "../public/Spinner";
+import SkeletonTable from "../public/SkeletonTable";
 
 
  
@@ -103,7 +105,7 @@ const handleViewTimeline = (parcel: any) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {loadingStats ? (
-          <p>Loading stats...</p>
+            <Spinner />
         ) : stats ? (
           <>
             <div className="p-4 bg-white  rounded shadow text-center">
@@ -185,7 +187,7 @@ const handleViewTimeline = (parcel: any) => {
       <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Users</h2>
         {loadingUsers ? (
-          <p>Loading users...</p>
+          <SkeletonTable/>
         ) : users && users.length > 0 ? (
           <table className="w-full border">
             <thead>
@@ -234,7 +236,7 @@ const handleViewTimeline = (parcel: any) => {
       <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Parcels</h2>
         {loadingParcels ? (
-          <p>Loading parcels...</p>
+          <SkeletonTable/>
         ) : parcels && parcels.length > 0 ? (
           <table className="w-full border">
             <thead>
@@ -295,7 +297,7 @@ const handleViewTimeline = (parcel: any) => {
         )}
 
    {timelineOpen && selectedParcel && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50 z-50">
           <div className="bg-white  p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
             <ul className="space-y-2">

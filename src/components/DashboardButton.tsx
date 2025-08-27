@@ -30,7 +30,7 @@ export default function DashboardButton() {
   return (
     <button
       onClick={handleGoDashboard}
-      className="px-6 py-2 mt-6 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+      className="px-6 py-2 mt-6 bg-blue-600 text-white rounded-lg cursor-pointer shadow hover:bg-blue-700 transition"
     >
       Go to Dashboard
     </button>
