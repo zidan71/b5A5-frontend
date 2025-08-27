@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useGetAdminDashboardQuery } from "../../features/dashboardApi";
 import { useIncomingParcelsQuery, useDeliveredParcelsQuery, useConfirmParcelDeliveryMutation } from "../../features/parcels/parcelApi";
 import toast from "react-hot-toast";
+import Navbar from "../../components/layout/Navbar";
 
 export default function ReceiverDashboard() {
 
@@ -36,7 +37,13 @@ const handleViewTimeline = (parcel: any) => {
   };
 
   return (
+    <div>
+
+      <Navbar></Navbar>
+
     <div className="p-6">
+
+
       <h1 className="text-2xl font-semibold mb-6">Receiver Dashboard</h1>
 
       {/* Overview Cards */}
@@ -45,15 +52,15 @@ const handleViewTimeline = (parcel: any) => {
           <p>Loading stats...</p>
         ) : (
           <>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Parcels Received</h2>
               <p className="text-2xl font-bold">{stats?.totalParcels || 0}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Delivered</h2>
               <p className="text-2xl font-bold">{stats?.deliveredParcels || 0}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+            <div className="p-4 bg-white  rounded shadow">
               <h2 className="font-medium">Pending</h2>
               <p className="text-2xl font-bold">{stats?.pendingParcels || 0}</p>
             </div>
@@ -62,12 +69,12 @@ const handleViewTimeline = (parcel: any) => {
       </div>
 
       {/* Incoming Parcels */}
-      <div className="mb-10 p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="mb-10 p-4 bg-white  rounded shadow">
         <h2 className="text-xl font-medium mb-4">Incoming Parcels</h2>
         {loadingIncoming ? <p>Loading...</p> : Array.isArray(incoming) && incoming.length > 0 ? (
           <table className="w-full border">
             <thead>
-              <tr className="bg-gray-200 dark:bg-gray-700">
+              <tr className="bg-gray-200 ">
                 <th className="p-2">Tracking ID</th>
                 <th className="p-2">Sender</th>
                 <th className="p-2">Type</th>
@@ -107,12 +114,12 @@ const handleViewTimeline = (parcel: any) => {
       </div>
 
       {/* Delivered Parcels */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
+      <div className="p-4 bg-white  rounded shadow overflow-x-auto">
         <h2 className="text-xl font-medium mb-4">Delivery History</h2>
         {loadingDelivered ? <p>Loading...</p> : Array.isArray(delivered) && delivered.length > 0 ? (
-          <table className="w-full border">
+          <table className="w-full border border-gray-300">
             <thead>
-              <tr className="bg-gray-200 dark:bg-gray-700">
+              <tr className="bg-gray-200 ">
                 <th className="p-2">Tracking ID</th>
                 <th className="p-2">Sender</th>
                 <th className="p-2">Type</th>
@@ -133,7 +140,7 @@ const handleViewTimeline = (parcel: any) => {
                 <td className="p-2">
                     <button
                       onClick={() => handleViewTimeline(p)}
-                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      className="px-3 py-1 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"
                     >
                       View Timeline
                     </button>
@@ -146,8 +153,8 @@ const handleViewTimeline = (parcel: any) => {
         ) : <p>No delivered parcels yet.</p>}
 
    {timelineOpen && selectedParcel && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50 z-50">
+          <div className="bg-white  p-6 rounded shadow w-96 max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold mb-4">Parcel Timeline</h3>
             <ul className="space-y-2">
               {selectedParcel.statusLog?.length > 0 ? (
@@ -165,7 +172,7 @@ const handleViewTimeline = (parcel: any) => {
             </ul>
             <button
               onClick={() => setTimelineOpen(false)}
-              className="mt-4 px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
+              className="mt-4 px-4 py-2 cursor-pointer bg-gray-300 dark:bg-gray-700 rounded hover:bg-gray-400"
             >
               Close
             </button>
@@ -174,6 +181,7 @@ const handleViewTimeline = (parcel: any) => {
       )}
 
       </div>
+    </div>
     </div>
   );
 }
