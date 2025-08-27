@@ -15,6 +15,12 @@ export const parcelApi = apiSlice.injectEndpoints({
       query: (id) => ({ url: `/parcels/cancel/${id}`, method: "PATCH" }),
     }),
 
+    getParcels: builder.query<any, { page?: number; search?: string; status?: string }>({
+      query: ({ page = 1, search = "", status = "" }) =>
+        `/parcels?page=${page}&search=${search}&status=${status}`,
+      providesTags: ["Parcel"],
+    }),
+
     // Receiver
     incomingParcels: builder.query<any[], void>({
       query: () => "/parcels/incoming",
@@ -68,6 +74,7 @@ export const {
   useConfirmParcelDeliveryMutation,
   useAllParcelsQuery,
   useUpdateParcelStatusMutation,
-  useLazyTrackParcelQuery
+  useLazyTrackParcelQuery,
+  useGetParcelsQuery
 
 } = parcelApi;

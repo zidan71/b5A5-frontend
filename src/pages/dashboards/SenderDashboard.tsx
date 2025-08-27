@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useAppSelector } from "../../hooks/useApp";
 import {
   useCreateParcelMutation,
   useMyParcelsQuery,
@@ -33,12 +31,19 @@ export default function SenderDashboard() {
   const [selectedParcel, setSelectedParcel] = useState<any | null>(null);
   const [timelineOpen, setTimelineOpen] = useState(false);
 
+
+
+
+  
+
+ 
+
+
   const handleViewTimeline = (parcel: any) => {
     setSelectedParcel(parcel);
     setTimelineOpen(true);
   };
 
-  const auth = useAppSelector((state: any) => state.auth);
 
   const { data: stats, isLoading: loadingStats } = useGetAdminDashboardQuery();
   const { data: parcels, isLoading, refetch } = useMyParcelsQuery();
@@ -53,6 +58,9 @@ export default function SenderDashboard() {
   } = useForm<ParcelFormValues>({
     resolver: yupResolver(parcelSchema),
   });
+
+
+ 
 
   const onSubmit = async (data: ParcelFormValues) => {
     try {
@@ -229,6 +237,8 @@ export default function SenderDashboard() {
           ) : (
             <p>No parcels yet.</p>
           )}
+
+          
 
           {/* ✅ Timeline Modal */}
           {timelineOpen && selectedParcel && (
